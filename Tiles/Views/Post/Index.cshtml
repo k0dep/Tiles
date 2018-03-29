@@ -1,0 +1,19 @@
+﻿@using Microsoft.AspNetCore.Mvc.Rendering
+@model IEnumerable<Tiles.Models.Data.Post>
+@{
+    ViewData["Title"] = "Posts";
+    Layout = "_Layout";
+}
+
+<h2>Posts</h2>
+
+@Html.ActionLink("Create", "Create")
+<br/>
+
+@foreach (var post in Model)
+{
+    @Html.ActionLink($"{post.Id} - {post.Title} - {post.PublishDate}", "Details", new {id = post.Id})
+    <br/>
+}
+
+

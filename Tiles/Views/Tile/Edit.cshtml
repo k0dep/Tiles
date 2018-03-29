@@ -1,0 +1,46 @@
+﻿@model Tiles.Models.Data.Tile
+
+@{
+    ViewBag.Title = "Edit tile";
+    Layout = "_Layout";
+}
+
+<h2>Edit tile - @Model.Id</h2>
+
+<form asp-controller="Tile" asp-action="Edit" method="post">
+    
+    <input type="hidden" asp-for="Id" value="@Model.Id" />
+
+    <div class="form-group">
+        <label asp-for="Title">Title</label>
+        <input type="text" class="form-control" asp-for="Title" placeholder="Enter tile title" value="@Model.Title" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MiniDesc">Short description</label>
+        <input type="text" class="form-control" asp-for="MiniDesc" placeholder="Enter tile description" value="@Model.MiniDesc" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Uri">Url</label>
+        <input type="text" class="form-control" asp-for="Uri" placeholder="Enter tile url" value="@Model.Uri" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Width">Width</label>
+        <input type="number" class="form-control" asp-for="Width" placeholder="Enter tile width" value="@Model.Width" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Height">Height</label>
+        <input type="number" class="form-control" asp-for="Height" placeholder="Enter tile height" value="@Model.Height" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PhotoUri">Image url</label>
+        <input type="text" class="form-control" asp-for="PhotoUri" placeholder="Enter image url" value="@Model.PhotoUri" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+

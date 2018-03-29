@@ -1,0 +1,65 @@
+﻿@using Microsoft.AspNetCore.Http
+@using Models.Data
+@model IEnumerable<Tiles.Models.Data.Tile>
+
+@{
+    ViewBag.Title = "Home";
+    Layout = "_LayoutHome";
+}
+
+<div class="container">
+    <div class="tiles">
+        <div class="tile-row" data-masonry='{ "itemSelector": ".tile", "columnWidth": 200 }'>
+            
+            @foreach (var tile in Model)
+            {
+                <a href="@tile.Uri" class="tile row-@tile.Height col-@tile.Width" @{
+                                                                                      if (!string.IsNullOrEmpty(tile.PhotoUri))
+                                                                                      {
+                                                                                          <text>style="background: url(@tile.PhotoUri) 100% 100% no-repeat; background-size: cover;"</text>
+                                                                                      }
+                                                                                  }>
+                    <div class="tile-caption">
+                        <header>@tile.Title</header>
+                        <p>
+                        @if (ViewContext.HttpContext.User.Identity.IsAuthenticated)
+    {
+        <object type="lol/wut">
+        <a asp-controller="Tile" asp-action="Edit" asp-route-id="@tile.Id"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+        <a asp-controller="Tile" asp-action="Delete" asp-route-id="@tile.Id"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+        </object>
+}
+                        @tile.MiniDesc
+                        </p>
+                    </div>
+                </a>
+            }
+
+            @if (!ViewContext.HttpContext.User.Identity.IsAuthenticated)
+            {
+                <a asp-controller="Account" asp-action="Signin" class="tile row-1 col-1">
+                    <h1 class="glyphicon glyphicon glyphicon-log-in" aria-hidden="true"></h1>
+                    <div class="tile-caption">
+                        <header>Sign In</header>
+                    </div>
+                </a>
+            }
+            else
+            {
+                <a asp-controller="Account" asp-action="Signout" class="tile row-1 col-1">
+                    <h1 class="glyphicon glyphicon glyphicon-log-out" aria-hidden="true"></h1>
+                    <div class="tile-caption">
+                        <header>Sign Out</header>
+                    </div>
+                </a>
+
+                <a asp-action="Create" class="tile row-1 col-1">
+                    <h1 class="glyphicon glyphicon-plus" aria-hidden="true"></h1>
+                    <div class="tile-caption">
+                        <header>Add Tile</header>
+                    </div>
+                </a>
+            }
+        </div>
+    </div>
+</div>

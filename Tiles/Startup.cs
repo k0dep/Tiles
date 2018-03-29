@@ -1,11 +1,14 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MongoDB.Driver;
+using Tiles.Models;
+using Tiles.Models.Data;
 
 namespace Tiles
 {
@@ -18,19 +21,39 @@ namespace Tiles
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddTransient(MongoFactory);
+            services.AddTransient<PostsRepository>();
+            services.AddTransient<TileRepository>();
+            services.AddTransient<UsersRepository>();
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(opt =>
+                {
+                    opt.LoginPath = new PathString("/account/signin");
+                });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, UsersRepository users)
         {
             if (env.IsDevelopment())
             {
                 app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
+
+                Task.Run(async () =>
+                {
+                    if (await users.GetUser("admin") == null)
+                        await users.SaveUser(new User()
+                        {
+                            Login = "admin",
+                            Password = "admin"
+                        });
+                });
             }
             else
             {
@@ -39,7 +62,24 @@ namespace Tiles
 
             app.UseStaticFiles();
 
-            app.UseMvc();
+            app.UseAuthentication();
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Tile}/{action=Index}/{id?}");
+            });
+        }
+
+
+
+        IMongoDatabase MongoFactory(IServiceProvider serviceProvider)
+        {
+            string connectionString = Configuration.GetValue<string>("Mongo");
+            var connection = new MongoUrlBuilder(connectionString);
+            var client = new MongoClient(connectionString);
+            return client.GetDatabase(connection.DatabaseName);
         }
     }
 }

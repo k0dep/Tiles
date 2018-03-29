@@ -1,35 +1,138 @@
+html,
 body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    margin: 0;
+    padding: 0;
+    background: gray;
 }
 
-/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+.tile {
+    -webkit-box-shadow: inset 0 0 200px #000;
+    -moz-box-shadow: inset 0 0 200px #000;
+    box-shadow: inset 0 0 200px #000;
 }
 
-/* Carousel */
-.carousel-caption p {
-    font-size: 20px;
-    line-height: 1.4;
+.tiles {
+    font-family: Helvetica, Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+    font-size: 16px;
 }
 
-/* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"] {
+.tiles .tile {
+    margin: 0;
+    padding: 5px 15px;
+    overflow: hidden;
+}
+
+.tiles .tile.row-1 .tile-caption {
+    top: 151px;
+}
+
+.tiles .tile.row-2 .tile-caption {
+    top: 351px;
+}
+
+.tiles .tile.row-3 .tile-caption {
+    top: 551px;
+}
+
+.tiles .tile.row-3 .tile-caption {
+    top: 751px;
+}
+
+.tiles .tile .tile-caption {
+    position: absolute;
+    left: 0;
+    padding: 0 10px 5px 10px;
+    color: #fff;
     width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    -moz-transition: ease-in-out 0.3s;
+    -o-transition: ease-in-out 0.3s;
+    -webkit-transition: ease-in-out 0.3s;
+    transition: ease-in-out 0.3s;
 }
 
-/* QR code generator */
-#qrCode {
-    margin: 15px;
+.tiles .tile:active {
+    box-shadow: rgba(0, 0, 0, 0.8) 0 0 50px 6px;
+    transition: .2s linear;
 }
 
-/* Hide/rearrange for smaller screens */
-@media screen and (max-width: 767px) {
-    /* Hide captions */
-    .carousel-caption {
-        display: none;
-    }
+.tile:hover {
+    box-shadow: rgba(0, 0, 0, 0.5) 0 0 40px 6px;
+    transition: .2s linear;
+    z-index: 100;
+}
+
+
+.tiles .tile .tile-caption header {
+    height: 50px;
+    line-height: 50px;
+    border-bottom: 1px solid #fff;
+}
+
+.tiles .tile .tile-caption .tile-arrow-up {
+    float: right;
+    line-height: 50px;
+    color: rgba(255, 255, 255, 0.8);
+    -moz-transition: ease-in-out 0.3s;
+    -o-transition: ease-in-out 0.3s;
+    -webkit-transition: ease-in-out 0.3s;
+    transition: ease-in-out 0.3s;
+}
+
+.tiles .tile .tile-caption:hover {
+    top: 0;
+}
+
+.tiles .tile .tile-caption:hover .tile-content {
+    top: 25px;
+}
+
+.tiles .tile .tile-caption:hover .tile-arrow-up {
+    opacity: 0;
+}
+
+.tiles .tile .tile-content {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 5px 10px;
+    height: 100%;
+    width: 100%;
+    top: 150px;
+    left: 0;
+    -moz-transition: ease-in-out 0.3s;
+    -o-transition: ease-in-out 0.3s;
+    -webkit-transition: ease-in-out 0.3s;
+    transition: ease-in-out 0.3s;
+}
+
+
+
+.row-1 {
+    height: 200px;
+}
+
+.row-2 {
+    height: 400px;
+}
+
+.row-3 {
+    height: 600px;
+}
+
+.row-4 {
+    height: 1000px;
+}
+
+
+.col-1 {
+    width: 200px;
+}
+.col-2 {
+    width: 400px;
+}
+.col-3 {
+    width: 600px;
+}
+.col-4 {
+    width: 1000px;
 }

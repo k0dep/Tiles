@@ -1,8 +1,19 @@
 version: '3'
 
 services:
+
+  mongo:
+    image: mongo
+    volumes:
+      - tilesmongodata:/data/db
+
   tiles:
     image: tiles
     build:
       context: .
       dockerfile: Tiles/Dockerfile
+    depends_on:
+      - mongo
+
+volumes:
+  tilesmongodata:
