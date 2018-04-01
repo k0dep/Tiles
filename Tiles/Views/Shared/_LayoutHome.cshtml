@@ -5,12 +5,15 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Tiles</title>
+    <title>Stanislav Petrov - software developer</title>
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
+    
+    <canvas id="demo-canvas" style="position: absolute; top: 0"></canvas>
+
     @RenderBody()
 
     <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -20,6 +23,11 @@
     
     @if (YandexCounter.CounterId != Int32.MaxValue)
         {@Html.Partial("~/Views/Shared/_YandexMetric.cshtml", YandexCounter)}
+    
+    
+    <script src="~/js/TweenLite.min.js"></script>
+    <script src="~/js/EasePack.min.js"></script>
+    <script src="~/js/circles.js"></script>
 
-</body>
+         </body>
 </html>
