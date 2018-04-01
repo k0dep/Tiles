@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@inject YandexMetricaCounterId YandexCounter
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -15,5 +17,9 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+    
+    @if (YandexCounter.CounterId != Int32.MaxValue)
+        {@Html.Partial("~/Views/Shared/_YandexMetric.cshtml", YandexCounter)}
+
 </body>
 </html>

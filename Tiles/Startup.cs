@@ -1,5 +1,3 @@
-using System;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -7,6 +5,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
+using System;
+using System.Threading.Tasks;
 using Tiles.Models;
 using Tiles.Models.Data;
 
@@ -30,11 +30,21 @@ namespace Tiles
             services.AddTransient<TileRepository>();
             services.AddTransient<UsersRepository>();
 
+            ConfigureYandexMetrica(services);
+
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(opt =>
                 {
                     opt.LoginPath = new PathString("/account/signin");
                 });
+        }
+
+        private void ConfigureYandexMetrica(IServiceCollection services)
+        {
+            var yaId = Configuration.GetValue<int?>("YandexMetricaId") ?? int.MaxValue;
+            var metrica = new YandexMetricaCounterId(yaId);
+
+            services.AddSingleton(metrica);
         }
 
 
