@@ -2,18 +2,29 @@
 @model IEnumerable<Tiles.Models.Data.Post>
 @{
     ViewData["Title"] = "Posts";
-    Layout = "_Layout";
+    Layout = "_LayoutHome";
 }
 
 <h2>Posts</h2>
 
-@Html.ActionLink("Create", "Create")
-<br/>
+<div class="container">
+    <div class="tiles">
+        <div class="tile-row">
+            
+            @foreach (var post in Model)
+            {
+                <div class="tile">
+                    <h4>@Html.ActionLink($"{post.Title}", "Details", new { id = post.Id })</h4>
+                    <strong>@post.ShortDescription</strong>
+                    <br/>
+                    <i>@post.PublishDate</i>
+                </div>
+            }
+        </div>
+    </div>
+    </div>
 
-@foreach (var post in Model)
+@if (ViewContext.HttpContext.User.Identity.IsAuthenticated)
 {
-    @Html.ActionLink($"{post.Id} - {post.Title} - {post.PublishDate}", "Details", new {id = post.Id})
-    <br/>
+    @Html.ActionLink("Create", "Create")
 }
-
-

@@ -1,14 +1,22 @@
-﻿@using Tiles.Models.Data
-@model Tiles.Models.Data.Post
+﻿@model Tiles.Models.Data.Post
 
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = $"Post - {Model.Title}";
     Layout = "_Layout";
 }
 
-<h2>@Model.Title</h2>
+<h1>@Model.Title</h1>
 
+<markdown>@Html.Raw(Model.Content)</markdown>
 
-<p>@Model.Content</p>
+<hr />
 
-<i>@Model.PublishDate</i>
+<a asp-controller="Tile" asp-action="Index">Home</a> | <a asp-controller="Post" asp-action="Index">All posts</a>
+
+@if (ViewContext.HttpContext.User.Identity.IsAuthenticated)
+{
+    <text>|</text>
+    <a asp-controller="Post" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+    <text>|</text>
+    <a asp-controller="Post" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+}

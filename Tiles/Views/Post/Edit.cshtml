@@ -1,0 +1,10 @@
+﻿@model Tiles.Models.Data.Post
+
+@{
+    ViewBag.Title = "Edit post";
+    Layout = "_Layout";
+}
+
+<h2>Create post</h2>
+
+@Html.Partial("_PostForm", Model, Html.vd(new { action = "Edit" }));

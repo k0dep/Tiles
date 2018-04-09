@@ -1,33 +1,26 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Tiles.Models;
 using Tiles.Models.Data;
 
 namespace Tiles.Controllers
 {
-
-
     /// <summary>
     /// Cooming soon
     /// </summary>
-    [Authorize]
     public class PostController : Controller
     {
-        public PostsRepository PostsRepository { get; private set; }
+        public PostsRepository PostsRepository { get; }
 
-        public PostController(PostsRepository postsRepository)
-        {
+        public PostController(PostsRepository postsRepository) => 
             PostsRepository = postsRepository;
-        }
 
-        public ActionResult Index()
-        {
-            return View(PostsRepository.AllPosts);
-        }
+
+        public ActionResult Index() =>
+            View(PostsRepository.AllPosts);
+
 
         public async Task<ActionResult> Details(string id)
         {
@@ -39,71 +32,59 @@ namespace Tiles.Controllers
             return View(post);
         }
 
-        public ActionResult Create()
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult Create() =>
+            View();
+
+
+        [Authorize]
+        [HttpPost]
+        public async Task<ActionResult> Create(Post post)
         {
-            PostsRepository.SavePost(new Post("New post", "Post content", DateTime.Now, new List<string>(){"new post"}));
+            if (!ModelState.IsValid)
+                return View();
+
+            post.PublishDate = DateTime.Now;
+
+            await PostsRepository.SavePost(post);
 
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize]
+        [HttpGet]
+        public async Task<ActionResult> Edit(string id)
+        {
+            var post = await PostsRepository.GetPost(id);
+            if (post == null)
+                return NotFound();
+
+            return View(post);
+        }
+
+        [Authorize]
         [HttpPost]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> Edit(Post post)
         {
-            try
-            {
-                // TODO: Add insert logic here
+            if (!ModelState.IsValid)
+                return View(post);
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            await PostsRepository.UpdatePost(post);
+
+            return RedirectToAction(nameof(Index));
         }
 
-        // GET: Post/Edit/5
-        public ActionResult Edit(int id)
+        [Authorize]
+        [HttpGet]
+        public async Task<ActionResult> Delete(string id)
         {
-            return View();
-        }
+            var post = await PostsRepository.GetPost(id);
+            if (post == null)
+                return NotFound();
 
-        // POST: Post/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Post/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Post/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction(nameof(Index));
         }
     }
 }

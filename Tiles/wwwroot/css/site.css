@@ -2,8 +2,7 @@ html,
 body {
     margin: 0;
     padding: 0;
-    padding-top: 40px;
-    background: #036;
+    background: gray;
 }
 
 .tile {
@@ -18,7 +17,7 @@ body {
 }
 
 .tiles .tile {
-    margin: 10px 0 0 0;
+    margin: 0;
     padding: 5px 15px;
     overflow: hidden;
 }
@@ -28,15 +27,15 @@ body {
 }
 
 .tiles .tile.row-2 .tile-caption {
-    top: 361px;
+    top: 351px;
 }
 
 .tiles .tile.row-3 .tile-caption {
-    top: 571px;
+    top: 551px;
 }
 
 .tiles .tile.row-3 .tile-caption {
-    top: 781px;
+    top: 751px;
 }
 
 .tiles .tile .tile-caption {
@@ -113,15 +112,15 @@ body {
 }
 
 .row-2 {
-    height: 410px;
+    height: 400px;
 }
 
 .row-3 {
-    height: 620px;
+    height: 600px;
 }
 
 .row-4 {
-    height: 1030px;
+    height: 1000px;
 }
 
 
@@ -129,11 +128,15 @@ body {
     width: 200px;
 }
 .col-2 {
-    width: 410px;
+    width: 400px;
 }
 .col-3 {
-    width: 620px;
+    width: 600px;
 }
 .col-4 {
-    width: 1030px;
+    width: 1000px;
+}
+
+.col-a {
+    width: 100%;
 }
