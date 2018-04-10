@@ -84,6 +84,8 @@ namespace Tiles.Controllers
             if (post == null)
                 return NotFound();
 
+            await PostsRepository.DeletePost(post);
+
             return RedirectToAction(nameof(Index));
         }
     }

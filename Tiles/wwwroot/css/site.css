@@ -1,8 +1,11 @@
+
 html,
 body {
     margin: 0;
     padding: 0;
-    background: gray;
+    padding-top: 40px;
+    background: #036;
+    opacity: .9999;
 }
 
 .tile {
@@ -17,25 +20,25 @@ body {
 }
 
 .tiles .tile {
-    margin: 0;
+    margin: 10px 0 0 0;
     padding: 5px 15px;
     overflow: hidden;
 }
 
-.tiles .tile.row-1 .tile-caption {
+.tiles .row-1 .tile-caption {
     top: 151px;
 }
 
-.tiles .tile.row-2 .tile-caption {
-    top: 351px;
+.tiles .row-2 .tile-caption {
+    top: 361px;
 }
 
-.tiles .tile.row-3 .tile-caption {
-    top: 551px;
+.tiles .row-3 .tile-caption {
+    top: 571px;
 }
 
-.tiles .tile.row-3 .tile-caption {
-    top: 751px;
+.tiles .row-4 .tile-caption {
+    top: 781px;
 }
 
 .tiles .tile .tile-caption {
@@ -62,7 +65,6 @@ body {
     transition: .2s linear;
     z-index: 100;
 }
-
 
 .tiles .tile .tile-caption header {
     height: 50px;
@@ -110,17 +112,14 @@ body {
 .row-1 {
     height: 200px;
 }
-
 .row-2 {
-    height: 400px;
+    height: 410px;
 }
-
 .row-3 {
-    height: 600px;
+    height: 620px;
 }
-
 .row-4 {
-    height: 1000px;
+    height: 1030px;
 }
 
 
@@ -128,15 +127,28 @@ body {
     width: 200px;
 }
 .col-2 {
-    width: 400px;
+    width: 410px;
 }
 .col-3 {
-    width: 600px;
+    width: 620px;
 }
 .col-4 {
-    width: 1000px;
+    width: 1030px;
 }
 
-.col-a {
-    width: 100%;
+
+
+.bg-fill {
+    padding: 1em 3em 1em 2em;
+    background: #c5c5c5;
+    box-shadow: rgba(0, 0, 0, 0.5) 0 0 40px 6px;
+}
+
+.tiles .bg-fill:hover {
+    box-shadow: rgba(0, 0, 0, 0.5) 0 0 80px 20px;
+    z-index: 100;
+}
+
+.txt-color-white {
+    color: #FFF;
 }

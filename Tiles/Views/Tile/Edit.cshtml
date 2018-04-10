@@ -2,9 +2,11 @@
 
 @{
     ViewBag.Title = "Edit tile";
-    Layout = "_Layout";
+    Layout = "_LayoutHome";
 }
 
-<h2>Edit tile - @Model.Id</h2>
+<div class="container bg-fill">
+    <h1>Edit tile - @Model.Id</h1>
 
-@Html.Partial("_TileForm", Model, Html.vd(new {action = "Edit"}));
+    @Html.Partial("_TileForm", Model, Html.vd(new { action = "Edit" }));
+</div>

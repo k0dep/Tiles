@@ -27,5 +27,8 @@ namespace Tiles.Models
 
         public IEnumerable<Post> AllPosts => 
             Posts.Find(_ => true).ToList();
+
+        public async Task DeletePost(Post post) =>
+            await Posts.DeleteOneAsync(p => p.Id == post.Id);
     }
 }

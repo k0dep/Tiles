@@ -2,9 +2,11 @@
 
 @{
     ViewBag.Title = "Create post";
-    Layout = "_Layout";
+    Layout = "_LayoutHome";
 }
 
-<h2>Create post</h2>
+<div class="container bg-fill">
+    <h1>Create post</h1>
 
-@Html.Partial("_PostForm", Model, Html.vd(new { action = "Create" }));
+    @Html.Partial("_PostForm", Model, Html.vd(new { action = "Create" }));
+</div>

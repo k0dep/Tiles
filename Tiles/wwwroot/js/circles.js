@@ -2,14 +2,15 @@
 
     var width, height, canvas, ctx, points, target, animateHeader = true;
 
-    // Main
-    initHeader();
-    initAnimation();
     addListeners();
+
+    function getHeight() {
+        return Math.max(document.body.clientHeight, window.innerHeight);
+    }
 
     function initHeader() {
         width = window.innerWidth;
-        height = window.innerHeight;
+        height = getHeight();
         target = {x: width/2, y: height/2};
 
         canvas = document.getElementById('demo-canvas');
@@ -19,10 +20,10 @@
 
         // create points
         points = [];
-        for(var x = 0; x < width; x = x + width/20) {
-            for(var y = 0; y < height; y = y + height/20) {
-                var px = x + Math.random()*width/20;
-                var py = y + Math.random()*height/20;
+        for(var x = -50; x < (width + 100); x = x + 80) {
+            for(var y = -50; y < (height + 100); y = y + 80) {
+                var px = x + Math.random() * 40;
+                var py = y + Math.random() * 40;
                 var p = {x: px, originX: px, y: py, originY: py };
                 points.push(p);
             }
@@ -72,6 +73,12 @@
         }
         window.addEventListener('scroll', scrollCheck);
         window.addEventListener('resize', resize);
+        window.addEventListener('load',
+            function() {
+                initHeader();
+                initAnimation();
+                addListeners();
+            });
     }
 
     function mouseMove(e) {
@@ -95,7 +102,7 @@
 
     function resize() {
         width = window.innerWidth;
-        height = window.innerHeight;
+        height = getHeight();
         canvas.width = width;
         canvas.height = height;
     }

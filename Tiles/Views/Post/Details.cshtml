@@ -2,21 +2,23 @@
 
 @{
     ViewBag.Title = $"Post - {Model.Title}";
-    Layout = "_Layout";
+    Layout = "_LayoutHome";
 }
 
-<h1>@Model.Title</h1>
+<div class="container bg-fill">
+    <h1>@Model.Title</h1>
 
-<markdown>@Html.Raw(Model.Content)</markdown>
+    <markdown>@Html.Raw(Model.Content)</markdown>
 
-<hr />
+    <hr />
 
-<a asp-controller="Tile" asp-action="Index">Home</a> | <a asp-controller="Post" asp-action="Index">All posts</a>
+    <a asp-controller="Tile" asp-action="Index">Home</a> | <a asp-controller="Post" asp-action="Index">All posts</a>
 
-@if (ViewContext.HttpContext.User.Identity.IsAuthenticated)
-{
-    <text>|</text>
-    <a asp-controller="Post" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
-    <text>|</text>
-    <a asp-controller="Post" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
-}
+    @if (ViewContext.HttpContext.User.Identity.IsAuthenticated)
+    {
+        <text>|</text>
+        <a asp-controller="Post" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+        <text>|</text>
+        <a asp-controller="Post" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+    }
+</div>

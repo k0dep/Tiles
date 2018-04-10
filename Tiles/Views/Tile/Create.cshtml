@@ -2,9 +2,11 @@
 
 @{
     ViewBag.Title = "Create tile";
-    Layout = "_Layout";
+    Layout = "_LayoutHome";
 }
 
-<h2>Create new tile</h2>
+<div class="container bg-fill">
+    <h1>Create new tile</h1>
 
-@Html.Partial("_TileForm", Model, Html.vd(new { action = "Create" }));
+    @Html.Partial("_TileForm", Model, Html.vd(new { action = "Create" }));
+</div>

@@ -5,16 +5,16 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Stanislav Petrov - software developer</title>
+    <title>@ViewData["Title"]</title>
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    
-    <canvas id="demo-canvas" style="position: absolute; top: 0"></canvas>
 
     @RenderBody()
+    
+    <canvas id="demo-canvas" style="position:absolute; top:0; left:0; z-index:-1;"></canvas>
 
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>

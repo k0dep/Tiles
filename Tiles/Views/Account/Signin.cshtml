@@ -2,25 +2,27 @@
 
 @{
     ViewBag.Title = "Sign In";
-    Layout = "_Layout";
+    Layout = "_LayoutHome";
 }
 
-<h2>Sign In</h2>
+<div class="container bg-fill">
+    <h1>Sign In</h1>
 
-<form asp-action="Signin" asp-controller="Account" method="post">
-    <div class="validation" asp-validation-summary="ModelOnly" />
+    <form asp-action="Signin" asp-controller="Account" method="post">
+        <div class="validation" asp-validation-summary="ModelOnly" />
 
-    <div class="form-group">
-        <label asp-for="Login">Login</label>
-        <input class="form-control" type="text" asp-for="Login" />
-        <span asp-validation-for="Login" />
-    </div>
+        <div class="form-group">
+            <label asp-for="Login">Login</label>
+            <input class="form-control" type="text" asp-for="Login" />
+            <span asp-validation-for="Login" />
+        </div>
 
-    <div class="form-group">
-        <label asp-for="Password">Password</label>
-        <input class="form-control" asp-for="Password" />
-        <span asp-validation-for="Password" />
-    </div>
+        <div class="form-group">
+            <label asp-for="Password">Password</label>
+            <input class="form-control" asp-for="Password" />
+            <span asp-validation-for="Password" />
+        </div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>

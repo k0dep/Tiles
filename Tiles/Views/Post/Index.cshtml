@@ -5,26 +5,26 @@
     Layout = "_LayoutHome";
 }
 
-<h2>Posts</h2>
-
 <div class="container">
+    
+    <h1 class="txt-color-white">Posts</h1>
+
     <div class="tiles">
-        <div class="tile-row">
-            
-            @foreach (var post in Model)
-            {
-                <div class="tile">
-                    <h4>@Html.ActionLink($"{post.Title}", "Details", new { id = post.Id })</h4>
+        @foreach (var post in Model)
+        {
+            <a asp-controller="Post" asp-action="Details" asp-route-id="@post.Id">
+                <div class="tile bg-fill">
+                    <h4>@post.Title</h4>
                     <strong>@post.ShortDescription</strong>
-                    <br/>
+
                     <i>@post.PublishDate</i>
                 </div>
-            }
-        </div>
-    </div>
+            </a>
+        }
     </div>
 
-@if (ViewContext.HttpContext.User.Identity.IsAuthenticated)
-{
-    @Html.ActionLink("Create", "Create")
-}
+    @if (ViewContext.HttpContext.User.Identity.IsAuthenticated)
+    {
+        <a asp-controller="Post" asp-action="Create" class="txt-color-white">Create new post</a>
+    }
+</div>
